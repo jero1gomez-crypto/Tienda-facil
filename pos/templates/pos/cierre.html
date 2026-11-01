@@ -1,0 +1,4 @@
+{% extends 'pos/base.html' %}{% load pesos %}{% block t %}Cierre de caja{% endblock %}{% block c %}
+<h2>Cierre de caja</h2><form class="d-flex gap-2 mb-3 col-md-4"><input class="form-control" type="date" name="dia" value="{{ dia }}"><button class="btn btn-primary">Generar</button></form>
+<div class="card p-3 col-md-6"><table class="table mb-0"><tr><td>Efectivo</td><td class="text-end">{{ r.EFECTIVO|pesos }}</td></tr><tr><td>Transferencia</td><td class="text-end">{{ r.TRANSFERENCIA|pesos }}</td></tr><tr><td>Fiado</td><td class="text-end">{{ r.FIADO|pesos }}</td></tr>
+<tr class="fw-bold fs-5"><td>Total</td><td class="text-end">{{ r.TOTAL|pesos }}</td></tr></table></div>{% endblock %}

@@ -1,0 +1,6 @@
+{% extends 'pos/base.html' %}{% block t %}Entrada{% endblock %}{% block c %}
+<h2>Entrada de mercancía</h2><div class="card p-3 col-md-6"><form method="post">{% csrf_token %}
+<label class="form-label">Producto</label><select class="form-select mb-2" name="producto">{% for p in productos %}<option value="{{ p.id }}">{{ p.nombre }} (stock {{ p.stock }})</option>{% endfor %}</select>
+<label class="form-label">Cantidad</label><input class="form-control mb-2" type="number" name="cantidad" min="1" required>
+<label class="form-label">Fecha de vencimiento</label><input class="form-control mb-3" type="date" name="vence" required>
+<button class="btn btn-success">Guardar entrada</button></form></div>{% endblock %}

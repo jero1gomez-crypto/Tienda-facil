@@ -1,0 +1,5 @@
+{% extends 'pos/base.html' %}{% block t %}Inicio{% endblock %}{% block c %}
+<h2 class="mb-3">Hola, {{ user.first_name|default:user.username }}</h2>
+<div class="row g-3"><div class="col-md-4"><div class="card p-3"><div class="text-muted">Ventas de hoy</div><div class="display-5">{{ ventas_hoy }}</div><a href="/venta/" class="btn btn-success mt-2">Nueva venta</a></div></div>
+<div class="col-md-4"><div class="card p-3"><h5>Alertas de stock bajo</h5>{% for a in alertas %}<div class="text-danger">⚠ {{ a.mensaje }}</div>{% empty %}<div class="text-muted">Sin alertas</div>{% endfor %}</div></div>
+<div class="col-md-4"><div class="card p-3"><h5>Vencen en 7 días</h5>{% for l in vencen %}<div>{{ l.producto.nombre }} · {{ l.cantidad }} u · {{ l.fecha_vencimiento|date:"d/m/Y" }}</div>{% empty %}<div class="text-muted">Nada por vencer</div>{% endfor %}</div></div></div>{% endblock %}

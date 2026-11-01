@@ -1,0 +1,2 @@
+{% extends 'pos/base.html' %}{% block t %}Pedido sugerido{% endblock %}{% block c %}
+<h2>Pedido sugerido por distribuidor</h2>{% for d, ps in grupos.items %}<div class="card p-3 mb-3"><h5>{{ d }}</h5><ul class="mb-0">{% for p in ps %}<li>{{ p.nombre }}: stock {{ p.stock }}, mínimo {{ p.stock_minimo }}</li>{% endfor %}</ul></div>{% empty %}<p class="text-muted">Ningún producto bajo su mínimo.</p>{% endfor %}{% endblock %}

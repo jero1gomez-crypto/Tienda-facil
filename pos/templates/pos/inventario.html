@@ -1,0 +1,5 @@
+{% extends 'pos/base.html' %}{% load pesos %}{% block t %}Inventario{% endblock %}{% block c %}
+<div class="d-flex justify-content-between"><h2>Inventario</h2><a href="/entrada/" class="btn btn-primary align-self-center">Registrar entrada</a></div>
+<div class="card p-3"><table class="table"><thead><tr><th>Código</th><th>Producto</th><th>Precio</th><th>Stock</th><th>Mínimo</th><th>Distribuidor</th></tr></thead><tbody>
+{% for p in productos %}<tr class="{% if p.bajo_minimo %}table-danger{% endif %}"><td>{{ p.codigo_barras }}</td><td>{{ p.nombre }}</td><td>{{ p.precio|pesos }}</td><td>{{ p.stock }}</td><td>{{ p.stock_minimo }}</td><td>{{ p.distribuidor|default:"-" }}</td></tr>{% endfor %}
+</tbody></table></div>{% endblock %}

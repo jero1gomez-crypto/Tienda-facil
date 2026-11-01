@@ -1,0 +1,17 @@
+{% load pesos %}<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TiendaFácil · {% block t %}{% endblock %}</title>
+{% load static %}<link href="{% static 'pos/bootstrap.min.css' %}" rel="stylesheet">
+<style>body{background:#f4f6f8}.navbar-brand b{color:#ffc107}.card{border:0;box-shadow:0 1px 3px rgba(0,0,0,.08)}</style></head><body>
+{% if user.is_authenticated %}
+<nav class="navbar navbar-expand navbar-dark bg-success mb-4"><div class="container">
+<a class="navbar-brand" href="/">Tienda<b>Fácil</b> <small class="fs-6 opacity-75">· Minimercado La Esquina</small></a>
+<ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="/venta/">Nueva venta</a></li>
+<li class="nav-item"><a class="nav-link" href="/inventario/">Inventario</a></li>
+<li class="nav-item"><a class="nav-link" href="/fiado/">Fiado</a></li>
+{% if user.is_staff %}<li class="nav-item"><a class="nav-link" href="/reportes/cierre/">Cierre de caja</a></li>
+<li class="nav-item"><a class="nav-link" href="/reportes/pedido/">Pedido sugerido</a></li>{% endif %}
+</ul><form method="post" action="/logout/">{% csrf_token %}<span class="text-white me-2">{{ user.first_name|default:user.username }}</span><button class="btn btn-sm btn-outline-light">Salir</button></form>
+</div></nav>{% endif %}
+<main class="container">{% for m in messages %}<div class="alert alert-{% if m.tags == 'error' %}danger{% else %}{{ m.tags }}{% endif %}">{{ m }}</div>{% endfor %}
+{% block c %}{% endblock %}</main></body></html>

@@ -1,0 +1,13 @@
+{% extends 'pos/base.html' %}{% load pesos %}{% block t %}Nueva venta{% endblock %}{% block c %}
+<h2>Nueva venta</h2><div class="row g-3"><div class="col-md-8"><div class="card p-3">
+<form method="post" class="d-flex gap-2 mb-3">{% csrf_token %}<input type="hidden" name="accion" value="agregar">
+<input class="form-control" name="codigo" placeholder="Escanee el código de barras" autofocus><input class="form-control" style="width:90px" type="number" name="cantidad" value="1" min="1"><button class="btn btn-primary">Agregar</button></form>
+<table class="table"><thead><tr><th>Producto</th><th>Cant.</th><th>Precio</th><th class="text-end">Subtotal</th></tr></thead><tbody>
+{% for l in lineas %}<tr><td>{{ l.p.nombre }}</td><td>{{ l.cant }}</td><td>{{ l.p.precio|pesos }}</td><td class="text-end">{{ l.sub|pesos }}</td></tr>{% empty %}<tr><td colspan="4" class="text-muted">Sin productos</td></tr>{% endfor %}
+</tbody></table></div></div>
+<div class="col-md-4"><div class="card p-3"><div class="text-muted">Total</div><div class="display-5 mb-3">{{ total|pesos }}</div>
+<form method="post">{% csrf_token %}<input type="hidden" name="accion" value="confirmar">
+<select class="form-select mb-2" name="medio_pago"><option value="EFECTIVO">Efectivo</option><option value="TRANSFERENCIA">Transferencia</option><option value="FIADO">Fiado</option></select>
+<select class="form-select mb-3" name="cliente"><option value="">Cliente (solo fiado)</option>{% for c in clientes %}<option value="{{ c.id }}">{{ c.nombre }}</option>{% endfor %}</select>
+<button class="btn btn-success w-100">Confirmar venta</button></form>
+<form method="post" class="mt-2">{% csrf_token %}<input type="hidden" name="accion" value="vaciar"><button class="btn btn-link w-100">Vaciar</button></form></div></div></div>{% endblock %}

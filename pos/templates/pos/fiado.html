@@ -1,0 +1,6 @@
+{% extends 'pos/base.html' %}{% load pesos %}{% block t %}Fiado{% endblock %}{% block c %}
+<h2>Fiado de clientes</h2><div class="row g-3"><div class="col-md-7"><div class="card p-3"><table class="table"><thead><tr><th>Cliente</th><th>Teléfono</th><th class="text-end">Saldo pendiente</th></tr></thead><tbody>
+{% for c in clientes %}<tr><td>{{ c.nombre }}</td><td>{{ c.telefono }}</td><td class="text-end fw-bold">{{ c.saldo|pesos }}</td></tr>{% endfor %}</tbody></table></div></div>
+<div class="col-md-5"><div class="card p-3"><h5>Registrar abono</h5><form method="post">{% csrf_token %}
+<select class="form-select mb-2" name="cliente">{% for c in clientes %}<option value="{{ c.id }}">{{ c.nombre }}</option>{% endfor %}</select>
+<input class="form-control mb-2" type="number" name="valor" placeholder="Valor" min="1" required><button class="btn btn-success">Guardar abono</button></form></div></div></div>{% endblock %}
